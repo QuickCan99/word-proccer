@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Word Processor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #toolbar {
+      margin-bottom: 10px;
+    }
+    #toolbar button, #toolbar select, #toolbar input[type="color"] {
+      margin-right: 5px;
+    }
+    #editor {
+      border: 1px solid #ccc;
+      padding: 10px;
+      min-height: 300px;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="toolbar">
+    <button onclick="execCmd('bold')"><b>B</b></button>
+    <button onclick="execCmd('italic')"><i>I</i></button>
+    <button onclick="execCmd('underline')"><u>U</u></button>
+    <button onclick="execCmd('strikeThrough')"><s>S</s></button>
+    <select onchange="execCmdWithArg('fontName', this.value)">
+      <option selected disabled>Font</option>
+      <option value="Arial">Arial</option>
+      <option value="Courier New">Courier New</option>
+      <option value="Georgia">Georgia</option>
+      <option value="Times New Roman">Times New Roman</option>
+      <option value="Verdana">Verdana</option>
+    </select>
+    <select onchange="execCmdWithArg('fontSize', this.value)">
+      <option selected disabled>Size</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+    </select>
+    <input type="color" onchange="execCmdWithArg('foreColor', this.value)">
+    <button onclick="execCmd('justifyLeft')">Left</button>
+    <button onclick="execCmd('justifyCenter')">Center</button>
+    <button onclick="execCmd('justifyRight')">Right</button>
+    <button onclick="execCmd('insertUnorderedList')">• List</button>
+    <button onclick="execCmd('insertOrderedList')">1. List</button>
+    <button onclick="execCmd('undo')">Undo</button>
+    <button onclick="execCmd('redo')">Redo</button>
+  </div>
+
+  <div id="editor" contenteditable="true">
+    Start typing here...
+  </div>
+
+  <script>
+    function execCmd(command) {
+      document.execCommand(command, false, null);
+    }
+
+    function execCmdWithArg(command, arg) {
+      document.execCommand(command, false, arg);
+    }
+  </script>
+
+</body>
+</html>
